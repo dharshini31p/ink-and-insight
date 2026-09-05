@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dharshini T — Journalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F1EC;
+    --paper-warm:#EAE8E1;
+    --ink:#161513;
+    --ink-soft:#4B4842;
+    --red:#B7202C;
+    --red-soft:#D0424C;
+    --blue:#25405F;
+    --line:#CFCABD;
+    --max:1160px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:transparent;
+    color:var(--ink);
+    font-family:'Source Serif 4',serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--red);color:var(--paper);}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:2px solid var(--red); outline-offset:3px;}
+
+  h1,h2,h3{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    margin:0;
+    color:var(--ink);
+  }
+
+  .sans{font-family:'Inter',sans-serif;}
+  button{ font:inherit; }
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  /* ---------- AMBIENT MOVING BACKGROUND ---------- */
+  .ambient-bg{
+    position:fixed; inset:0; z-index:-2;
+    overflow:hidden; background:var(--paper);
+  }
+  .blob{ position:absolute; border-radius:50%; filter:blur(95px); will-change:transform; }
+  .blob-1{ width:52vw;height:52vw; top:-16vw;left:-12vw; background:var(--red); opacity:0.16; animation:drift-a 34s ease-in-out infinite; }
+  .blob-2{ width:44vw;height:44vw; top:35vh;right:-14vw; background:var(--blue); opacity:0.16; animation:drift-b 40s ease-in-out infinite; }
+  .blob-3{ width:36vw;height:36vw; bottom:-8vw;left:22vw; background:var(--red-soft); opacity:0.12; animation:drift-c 46s ease-in-out infinite; }
+  @keyframes drift-a{ 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(8vw,10vw) scale(1.12);} 66%{transform:translate(-6vw,4vw) scale(0.92);} }
+  @keyframes drift-b{ 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-10vw,6vw) scale(0.9);} 66%{transform:translate(4vw,-8vw) scale(1.15);} }
+  @keyframes drift-c{ 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(6vw,-10vw) scale(1.2);} }
+
+  /* ---------- MASTHEAD / NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(242,241,236,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:2px solid var(--ink);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 40px; max-width:var(--max); margin:0 auto;
+  }
+  .brand{
+    font-family:'Playfair Display',serif;
+    font-weight:900;
+    font-size:1.6rem;
+    letter-spacing:0.01em;
+  }
+  .brand span{ color:var(--red); }
+  .nav-links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; font-family:'Inter',sans-serif; font-size:0.92rem; }
+  .nav-links a{ text-decoration:none; color:var(--ink-soft); position:relative; padding-bottom:3px; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-links a::after{ content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--red); transition:width 0.25s ease; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    font-family:'Inter',sans-serif; font-size:0.88rem; text-decoration:none;
+    background:var(--ink); color:var(--paper); padding:9px 20px; border-radius:2px;
+    transition:background 0.2s ease; border:none; cursor:pointer;
+  }
+  .nav-cta:hover{ background:var(--red); }
+
+  /* ---------- TICKER ---------- */
+  .ticker-bar{
+    background:var(--ink); color:var(--paper);
+    overflow:hidden; white-space:nowrap;
+    border-bottom:1px solid var(--line);
+  }
+  .ticker-track{
+    display:inline-flex;
+    animation:ticker-scroll 34s linear infinite;
+    padding:10px 0;
+    font-family:'Inter',sans-serif;
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+  }
+  .ticker-track span{
+    padding:0 34px;
+    border-right:1px solid rgba(242,241,236,0.25);
+  }
+  .ticker-track span strong{ color:var(--red-soft); margin-right:8px; }
+  @keyframes ticker-scroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:100px 0 80px;
+    display:grid;
+    grid-template-columns:1.3fr 0.9fr;
+    gap:60px;
+    align-items:end;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:0.9rem;
+    color:var(--red);
+    margin-bottom:20px;
+    opacity:0; animation:rise 0.7s ease forwards;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5.2vw, 4.5rem);
+    line-height:1.05;
+    max-width:15ch;
+    opacity:0; animation:rise 0.8s ease 0.1s forwards;
+  }
+  .hero-side{ opacity:0; animation:rise 0.8s ease 0.3s forwards; }
+  .hero-side p{
+    font-size:1.1rem; color:var(--ink-soft); max-width:40ch; margin:0 0 26px;
+  }
+  .hero-actions{ display:flex; align-items:center; gap:22px; flex-wrap:wrap; font-family:'Inter',sans-serif; }
+  .btn-primary{
+    background:var(--red); color:var(--paper); text-decoration:none;
+    padding:13px 26px; border-radius:2px; font-size:0.95rem;
+    transition:background 0.2s ease; display:inline-block; border:none; cursor:pointer;
+  }
+  .btn-primary:hover{ background:var(--red-soft); }
+  .link-quiet{
+    text-decoration:none; font-size:0.92rem; color:var(--ink-soft);
+    border-bottom:1px solid var(--line); padding-bottom:2px; background:none; border-left:none; border-right:none; border-top:none; cursor:pointer;
+  }
+  .link-quiet:hover{ color:var(--ink); border-color:var(--ink); }
+
+  @keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ---------- STRIP ---------- */
+  .strip{ padding:24px 0; background:rgba(234,232,225,0.55); border-bottom:1px solid var(--line); }
+  .strip-row{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px 36px;
+    font-family:'Inter',sans-serif; font-size:0.92rem; color:var(--ink-soft);
+  }
+  .strip-row span strong{ color:var(--ink); font-family:'Playfair Display',serif; font-size:1.05rem; }
+
+  /* ---------- SECTION HEAD ---------- */
+  .section-head{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px;
+    margin-bottom:56px; align-items:baseline;
+  }
+  .section-head h2{ font-size:clamp(2rem, 3.2vw, 2.6rem); max-width:14ch; }
+  .section-head p{ color:var(--ink-soft); max-width:44ch; font-size:1rem; margin:0; font-family:'Inter',sans-serif; }
+
+  /* ---------- ABOUT ---------- */
+  .about{ padding:90px 0; border-bottom:1px solid var(--line); }
+  .about-grid{ display:grid; grid-template-columns:0.7fr 1.3fr; gap:56px; }
+  .about-mark{ font-family:'Playfair Display',serif; font-weight:900; font-size:6.5rem; line-height:1; color:var(--red); }
+  .about-body p{ font-size:1.05rem; color:var(--ink-soft); max-width:58ch; margin:0 0 20px; }
+  .about-body p:last-child{ margin-bottom:0; }
+
+  /* ---------- PORTFOLIO ---------- */
+  .portfolio{ padding:90px 0; border-bottom:1px solid var(--line); }
+  .article-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    border-top:1px solid var(--line); border-left:1px solid var(--line);
+  }
+  .article-card{
+    padding:30px 28px; border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .article-tag{ font-family:'Inter',sans-serif; font-size:0.78rem; color:var(--red); }
+  .article-card h3{ font-size:1.25rem; line-height:1.3; }
+  .article-card p{ font-size:0.95rem; color:var(--ink-soft); margin:0; flex-grow:1; }
+  .article-meta{ font-family:'Inter',sans-serif; font-size:0.85rem; color:var(--ink-soft); display:flex; justify-content:space-between; align-items:center; }
+  .read-btn{
+    background:none; border:none; padding:0; color:var(--ink); text-decoration:none;
+    border-bottom:1px solid var(--ink); cursor:pointer; font-family:'Inter',sans-serif; font-size:0.85rem;
+  }
+  .read-btn:hover{ color:var(--red); border-color:var(--red); }
+
+  /* ---------- BEATS ---------- */
+  .beats{ padding:90px 0; border-bottom:1px solid var(--line); background:rgba(234,232,225,0.4); }
+  .beats-row{ display:flex; flex-wrap:wrap; gap:14px; }
+  .beat-chip{ font-family:'Inter',sans-serif; font-size:0.95rem; padding:11px 22px; border:1px solid var(--ink); border-radius:2px; }
+
+  /* ---------- PUBLICATIONS ---------- */
+  .pubs{ padding:80px 0; border-bottom:1px solid var(--line); }
+  .pubs-row{ display:flex; flex-wrap:wrap; gap:0; border-top:1px solid var(--line); }
+  .pub-item{ flex:1 1 200px; padding:26px 24px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); font-family:'Playfair Display',serif; font-size:1.15rem; text-align:center; }
+
+  /* ---------- AWARDS ---------- */
+  .awards{ padding:90px 0; border-bottom:1px solid var(--line); }
+  .award-list{ border-top:1px solid var(--line); }
+  .award-row{ display:grid; grid-template-columns:140px 1fr; gap:28px; padding:26px 0; border-bottom:1px solid var(--line); font-family:'Inter',sans-serif; }
+  .award-year{ color:var(--red); font-weight:600; }
+  .award-row h3{ font-family:'Playfair Display',serif; font-size:1.15rem; margin-bottom:4px; }
+  .award-row p{ color:var(--ink-soft); font-size:0.92rem; margin:0; }
+
+  /* ---------- CTA ---------- */
+  .cta{ padding:110px 0 80px; }
+  .cta h2{ font-size:clamp(2.2rem,4.4vw,3.2rem); max-width:18ch; margin-bottom:28px; }
+  .cta-row{ display:flex; align-items:center; gap:24px; flex-wrap:wrap; font-family:'Inter',sans-serif; }
+
+  footer{
+    border-top:2px solid var(--ink);
+    padding:28px 0 44px;
+    font-family:'Inter',sans-serif; font-size:0.88rem; color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------- ARTICLE MODAL ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(22,21,19,0.55);
+    backdrop-filter:blur(3px);
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:70px 24px;
+    overflow-y:auto;
+  }
+  .modal-backdrop.open{ display:flex; }
+  .modal-panel{
+    background:var(--paper);
+    max-width:680px; width:100%;
+    border:1px solid var(--ink);
+    padding:44px 48px;
+    position:relative;
+    animation:modal-in 0.25s ease forwards;
+  }
+  @keyframes modal-in{ from{ opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+  .modal-close{
+    position:absolute; top:20px; right:24px;
+    background:none; border:none; font-size:1.6rem; line-height:1; cursor:pointer;
+    color:var(--ink-soft); font-family:'Inter',sans-serif;
+  }
+  .modal-close:hover{ color:var(--red); }
+  .modal-tag{ font-family:'Inter',sans-serif; font-size:0.8rem; color:var(--red); margin-bottom:10px; display:block; }
+  .modal-panel h3{ font-size:1.8rem; line-height:1.2; margin-bottom:6px; }
+  .modal-meta{ font-family:'Inter',sans-serif; font-size:0.85rem; color:var(--ink-soft); margin-bottom:26px; }
+  .modal-body p{ font-size:1.02rem; color:#2c2a26; margin:0 0 16px; }
+  .modal-body p:last-child{ margin-bottom:0; }
+  body.modal-lock{ overflow:hidden; }
+
+  @media (max-width:860px){
+    .wrap{ padding:0 22px; }
+    nav{ padding:16px 22px; }
+    .nav-links{ display:none; }
+    .hero{ grid-template-columns:1fr; gap:32px; padding:70px 0 56px; }
+    .section-head{ grid-template-columns:1fr; gap:16px; }
+    .about-grid{ grid-template-columns:1fr; gap:24px; }
+    .about-mark{ font-size:4rem; }
+    .article-grid{ grid-template-columns:1fr; }
+    .strip-row{ flex-direction:column; gap:8px; }
+    .award-row{ grid-template-columns:1fr; gap:6px; }
+    .modal-panel{ padding:34px 26px; }
+    .modal-backdrop{ padding:40px 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-eyebrow, .hero h1, .hero-side{ animation:none !important; opacity:1 !important; }
+    .blob-1,.blob-2,.blob-3{ animation:none !important; }
+    .ticker-track{ animation:none !important; }
+    .nav-links a::after{ transition:none; }
+    .modal-panel{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-bg" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<header>
+  <nav>
+    <div class="brand">Dharshini <span>T.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#beats">Beats</a></li>
+      <li><a href="#awards">Awards</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </nav>
+  <div class="ticker-bar">
+    <div class="ticker-track">
+      <span><strong>Latest —</strong> Inside Chennai's second wave: the oxygen shortage nobody logged</span>
+      <span><strong>Investigation —</strong> The Godfather of Ward 9: unraveling the mystery</span>
+      <span><strong>History —</strong> The Health Ledger: a hundred-year paper trail</span>
+      <span><strong>Latest —</strong> Inside Chennai's second wave: the oxygen shortage nobody logged</span>
+      <span><strong>Investigation —</strong> The Godfather of Ward 9: unraveling the mystery</span>
+      <span><strong>History —</strong> The Health Ledger: a hundred-year paper trail</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <div class="hero-eyebrow">Reporter &amp; feature writer</div>
+      <h1>Stories worth chasing, told the way they deserve.</h1>
+    </div>
+    <div class="hero-side">
+      <p>I report on the stories between the headlines — civic issues, campus life, and the people usually left out of the official version. Currently writing for campus and local press, chasing bylines that matter.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#portfolio">Read my work</a>
+        <a class="link-quiet" href="#contact">Pitch me a story</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap strip-row">
+      <span><strong>25+</strong> published pieces</span>
+      <span><strong>3</strong> publications</span>
+      <span><strong>Based in</strong> Chennai</span>
+      <span><strong>Beats</strong> civic issues, culture, campus</span>
+    </div>
+  </div>
+
+  <section class="about wrap" id="about">
+    <div class="about-grid">
+      <div class="about-mark">DT</div>
+      <div class="about-body">
+        <p>I got into journalism the way most people get into things they can't stop doing — by accident, then completely. A campus paper assignment about a canteen price hike turned into a habit of noticing what nobody else was writing about.</p>
+        <p>Since then I've covered civic negligence, campus culture, and the small, human stories that usually get cut for space. I care less about being first with a story and more about getting it right — the quote in context, the number checked twice, the person who rarely gets asked.</p>
+        <p>I'm currently looking for reporting opportunities, internships, and stories worth chasing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio wrap" id="portfolio">
+    <div class="section-head">
+      <h2>Recent work.</h2>
+      <p>A selection of reported features and news pieces, across print and online. Click any story to read it in full.</p>
+    </div>
+    <div class="article-grid">
+      <div class="article-card">
+        <span class="article-tag">HEALTH</span>
+        <h3>Inside Chennai's second wave: the oxygen shortage nobody logged</h3>
+        <p>Hospital records and family accounts reveal a supply gap that official numbers never showed.</p>
+        <div class="article-meta"><span>The City Sheet</span><button class="read-btn" onclick="openArticle('covid')">Read →</button></div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">INVESTIGATION</span>
+        <h3>The Godfather of Ward 9: unraveling the mystery</h3>
+        <p>For twenty years, one man decided who got water, permits, and peace. Then he vanished.</p>
+        <div class="article-meta"><span>The City Sheet</span><button class="read-btn" onclick="openArticle('godfather')">Read →</button></div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">HISTORY</span>
+        <h3>The Health Ledger: a hundred-year paper trail</h3>
+        <p>Inside the oldest hospital's handwritten admission books, and what a century of ink reveals.</p>
+        <div class="article-meta"><span>Campus Quarterly</span><button class="read-btn" onclick="openArticle('ledger')">Read →</button></div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">FEATURE</span>
+        <h3>The last letterpress printer in the city</h3>
+        <p>A profile of a 70-year-old craft on the edge of disappearing, and the one man still keeping the machines running.</p>
+        <div class="article-meta"><span>Campus Quarterly</span><button class="read-btn" onclick="openArticle('press')">Read →</button></div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">CULTURE</span>
+        <h3>Why the city's street theatre scene is quietly booming</h3>
+        <p>A look at the collectives performing in parking lots and parks, and why audiences are choosing them over ticketed shows.</p>
+        <div class="article-meta"><span>Independent</span><button class="read-btn" onclick="openArticle('theatre')">Read →</button></div>
+      </div>
+      <div class="article-card">
+        <span class="article-tag">CAMPUS</span>
+        <h3>The hidden cost of "free" hostel wifi</h3>
+        <p>A data-backed look at what students are actually giving up in exchange for campus internet access.</p>
+        <div class="article-meta"><span>Campus Quarterly</span><button class="read-btn" onclick="openArticle('wifi')">Read →</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="beats wrap" id="beats">
+    <div class="section-head">
+      <h2>What I cover.</h2>
+      <p>The beats I keep coming back to, and the ones I'm building toward.</p>
+    </div>
+    <div class="beats-row">
+      <span class="beat-chip">Civic accountability</span>
+      <span class="beat-chip">Campus &amp; student life</span>
+      <span class="beat-chip">Culture &amp; the arts</span>
+      <span class="beat-chip">Local investigations</span>
+      <span class="beat-chip">Human interest</span>
+      <span class="beat-chip">Data-driven reporting</span>
+    </div>
+  </section>
+
+  <section class="pubs wrap">
+    <div class="section-head">
+      <h2>Bylines at.</h2>
+      <p></p>
+    </div>
+    <div class="pubs-row">
+      <div class="pub-item">The City Sheet</div>
+      <div class="pub-item">Campus Quarterly</div>
+      <div class="pub-item">Independent</div>
+    </div>
+  </section>
+
+  <section class="awards wrap" id="awards">
+    <div class="section-head">
+      <h2>Recognition.</h2>
+      <p></p>
+    </div>
+    <div class="award-list">
+      <div class="award-row">
+        <div class="award-year">2026</div>
+        <div><h3>Best Investigative Feature — State Student Press Awards</h3><p>For the Ward 12 water supply investigation.</p></div>
+      </div>
+      <div class="award-row">
+        <div class="award-year">2025</div>
+        <div><h3>Runner-up, Campus Journalism Fellowship</h3><p>Selected among 200+ applicants for a semester-long reporting fellowship.</p></div>
+      </div>
+      <div class="award-row">
+        <div class="award-year">2025</div>
+        <div><h3>Editor's Choice — Campus Quarterly</h3><p>For the letterpress printer profile, cited for its research and craft.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta wrap" id="contact">
+    <h2>Have a story that needs telling properly? Let's talk.</h2>
+    <div class="cta-row">
+      <a class="btn-primary" href="mailto:hello@dharshinit.com">Email hello@dharshinit.com</a>
+      <a class="link-quiet" href="Dharshini_T_Resume.pdf" download>Download resume</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Dharshini T.</span>
+  <span>Chennai, India · Open to reporting opportunities</span>
+</footer>
+
+<!-- ARTICLE MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this) closeArticle()">
+  <div class="modal-panel" role="dialog" aria-modal="true">
+    <button class="modal-close" onclick="closeArticle()" aria-label="Close">&times;</button>
+    <span class="modal-tag" id="modalTag"></span>
+    <h3 id="modalTitle"></h3>
+    <div class="modal-meta" id="modalMeta"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  const articles = {
+    covid: {
+      tag: "HEALTH",
+      title: "Inside Chennai's second wave: the oxygen shortage nobody logged",
+      meta: "The City Sheet · 6 min read",
+      body: [
+        "In April, city hospitals told the press that oxygen supply was 'stable.' Inside three government wards, families were told something different: bring your own cylinder, or wait.",
+        "Over five weeks, I cross-checked hospital procurement logs against supplier delivery records obtained through a records request. The gap between what was ordered and what arrived was never publicly disclosed — and it widened every time case numbers spiked.",
+        "Nurses on night shifts, speaking on condition of anonymity, described rationing decisions made quietly, ward to ward, with no official record of who went without and for how long.",
+        "The health department has since acknowledged 'localized delays' but maintains no patient was denied care. The families I spoke to remember it differently — and they kept the discharge papers to prove it."
+      ]
+    },
+    godfather: {
+      tag: "INVESTIGATION",
+      title: "The Godfather of Ward 9: unraveling the mystery",
+      meta: "The City Sheet · 8 min read",
+      body: [
+        "Everyone in Ward 9 has a story about Selvam Anna. He fixed water connections nobody else could get sanctioned, settled property disputes before they reached court, and — depending on who you ask — decided which small businesses were allowed to open and which weren't.",
+        "For two decades he held no official post, yet no municipal decision in the ward moved without his knowledge. Then, eight months ago, he stopped appearing in public. No funeral, no arrest record, no missing person report.",
+        "I spent three months tracing his name through land registry filings, old contractor payment records, and interviews with residents reluctant to go on record. What emerged was less a single mystery than a pattern: an entire unofficial administration running parallel to the real one.",
+        "This piece doesn't claim to know where he is. It documents, for the first time on record, how much of the ward's daily life quietly depended on a man with no title at all — and what's started to break down since he disappeared."
+      ]
+    },
+    ledger: {
+      tag: "HISTORY",
+      title: "The Health Ledger: a hundred-year paper trail",
+      meta: "Campus Quarterly · 7 min read",
+      body: [
+        "In the basement archive of the city's oldest government hospital sit eleven leather-bound admission ledgers, the earliest dated 1919. Water-stained and half-eaten by silverfish, they record, in fountain-pen script, every patient the hospital admitted through a century that included two epidemics and a World War.",
+        "I was given three days of supervised access to photograph and transcribe select pages. The ledgers show a hospital that tracked caste and religion of patients well into the 1970s — a practice quietly dropped from the record without ever being formally addressed.",
+        "They also show something the hospital's own centenary brochure leaves out: an entire wing, opened in 1931 and shut within four years, that modern staff had no institutional memory of at all until this reporting.",
+        "The hospital has since agreed to have the ledgers professionally conserved. What they preserve, and what they've quietly left out of their own history, is the real story here."
+      ]
+    },
+    press: {
+      tag: "FEATURE",
+      title: "The last letterpress printer in the city",
+      meta: "Campus Quarterly · 5 min read",
+      body: [
+        "Ganesan Achari has run the same hand-fed letterpress since 1974, setting type letter by letter for wedding cards and shop signage long after every other printer in the neighbourhood switched to offset and digital.",
+        "His shop survives on a client base that wants the specific, slightly imperfect impression only metal type leaves on paper — and on Achari's refusal to teach the trade to anyone in a hurry.",
+        "This profile follows one card order from typesetting to final print, and asks what's actually lost when a craft like this runs out of people willing to learn it slowly."
+      ]
+    },
+    theatre: {
+      tag: "CULTURE",
+      title: "Why the city's street theatre scene is quietly booming",
+      meta: "Independent · 6 min read",
+      body: [
+        "While ticketed venues report falling weekday attendance, informal street theatre collectives are drawing steady crowds in parking lots, parks, and market squares — performances that cost nothing to attend and rely entirely on word of mouth.",
+        "I spent six weeks with two collectives to understand what's driving the shift: lower barriers to staging work, audiences tired of formal venue etiquette, and a return to theatre as something that interrupts your day rather than something you plan around.",
+        "Not everyone is convinced it's sustainable. This piece looks at the economics behind free performance, and what these groups give up by staying outside the formal venue system."
+      ]
+    },
+    wifi: {
+      tag: "CAMPUS",
+      title: "The hidden cost of \"free\" hostel wifi",
+      meta: "Campus Quarterly · 5 min read",
+      body: [
+        "Every hostel resident signs the same terms-of-use form on move-in day. Almost nobody reads clause 14, which grants the college broad rights to monitor and retain browsing data indefinitely.",
+        "Using data requests and interviews with the IT office, this piece traces what's actually collected, how long it's kept, and how many students had no idea the 'free' network came with those terms attached.",
+        "The college maintains the policy is standard and rarely enforced. Three students I spoke to have reason to believe otherwise."
+      ]
+    }
+  };
+
+  function openArticle(id){
+    const a = articles[id];
+    if(!a) return;
+    document.getElementById('modalTag').textContent = a.tag;
+    document.getElementById('modalTitle').textContent = a.title;
+    document.getElementById('modalMeta').textContent = a.meta;
+    document.getElementById('modalBody').innerHTML = a.body.map(p => `<p>${p}</p>`).join('');
+    const backdrop = document.getElementById('modalBackdrop');
+    backdrop.classList.add('open');
+    backdrop.scrollTop = 0;
+    document.body.classList.add('modal-lock');
+  }
+  function closeArticle(){
+    document.getElementById('modalBackdrop').classList.remove('open');
+    document.body.classList.remove('modal-lock');
+  }
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeArticle();
+  });
+</script>
+
+</body>
+</html>
